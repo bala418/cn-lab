@@ -9,6 +9,7 @@ public class TCPEchoServer {
         BufferedReader socketin = new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintStream socketout = new PrintStream(s.getOutputStream());
 
+
         String msg;
 
         while (true) {
@@ -19,7 +20,6 @@ public class TCPEchoServer {
             }
 
             System.out.print("Client : " + msg + "\n");
-            System.out.println("Server Echoing ");
             socketout.println(msg);
         }
 

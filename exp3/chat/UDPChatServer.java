@@ -2,18 +2,15 @@ import java.io.*;
 import java.net.*;
 
 class UDPChatServer {
-    public static DatagramSocket serversocket;
-    public static DatagramPacket dp;
-    public static BufferedReader dis;
-    public static InetAddress ia;
-    public static byte buf[] = new byte[1024];
-    public static int cport = 789, sport = 790;
 
     public static void main(String[] a) throws IOException {
-        serversocket = new DatagramSocket(sport);
-        dp = new DatagramPacket(buf, buf.length);
-        dis = new BufferedReader(new InputStreamReader(System.in));
-        ia = InetAddress.getLocalHost();
+        int cport = 789, sport = 790;
+        byte buf[] = new byte[1024];
+        DatagramSocket serversocket = new DatagramSocket(sport);
+        DatagramPacket dp = new DatagramPacket(buf, buf.length);
+        BufferedReader dis = new BufferedReader(new InputStreamReader(System.in));
+        InetAddress ia = InetAddress.getLocalHost();
+
         System.out.println("Server is Running...");
         while (true) {
             serversocket.receive(dp);
@@ -23,7 +20,8 @@ class UDPChatServer {
                 break;
             }
             System.out.println("Client: " + str);
-            String str1 = new String(dis.readLine());
+            String str1 = new String(dis.readLine()); // chat
+            // String str1 = str; // echo
             buf = str1.getBytes();
             serversocket.send(new DatagramPacket(buf, str1.length(), ia, cport));
         }

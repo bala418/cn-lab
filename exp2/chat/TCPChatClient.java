@@ -10,6 +10,7 @@ public class TCPChatClient {
         PrintStream socketout = new PrintStream(s.getOutputStream());
 
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+
         String msg, inp;
         System.out.println("Connected");
 
@@ -19,8 +20,10 @@ public class TCPChatClient {
             msg = socketin.readLine();
             System.out.println("Recieved Message : " + msg);
 
-            if (msg.equals("bye"))
+            if (msg.equals("bye")) {
+                socketout.println(msg);
                 break;
+            }
         }
 
         s.close();

@@ -15,6 +15,9 @@ class UDPChatClient {
         dis = new BufferedReader(new InputStreamReader(System.in));
         ia = InetAddress.getLocalHost();
         System.out.println("Client is Running... Type 'STOP' to Quit");
+
+
+        
         while (true) {
             String str = new String(dis.readLine());
             buf = str.getBytes();
