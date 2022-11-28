@@ -13,13 +13,16 @@ class DNSServer
 
             DatagramPacket receiver=new DatagramPacket(receivebyte,receivebyte.length); 
             server.receive(receiver);
-            
+
             String str=new String(receiver.getData()); 
             String s=str.trim();      
             InetAddress addr=receiver.getAddress(); 
             int port=receiver.getPort();
+
             String ip[]={"192.165.1.1","192.165.1.5","192.168.1.1","192.165.1.6","192.165.1.2"};
             String name[]={"www.google.com","www.amazon.in","localhost","www.gmail.com","www.youtube.com"}; 
+
+            
             for(int i=0;i<ip.length;i++)
             {
                 if(s.equals(ip[i]))
