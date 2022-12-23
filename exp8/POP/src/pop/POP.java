@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package pop;
 
-/**
- *
- * @author bala9
- */
 import java.util.Properties;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -19,36 +11,35 @@ import javax.mail.Store;
 public class POP {
 
    public static void check(String host, String storeType, String user,
-      String password) 
-   {
+         String password) {
       try {
-      Properties properties = new Properties();
+         Properties properties = new Properties();
 
-      properties.put("mail.pop3.host", host);
-      properties.put("mail.pop3.port", "995");
-      properties.put("mail.pop3.starttls.enable", "true");
-      
-      Session emailSession = Session.getDefaultInstance(properties);
+         properties.put("mail.pop3.host", host);
+         properties.put("mail.pop3.port", "995");
+         properties.put("mail.pop3.starttls.enable", "true");
 
-      Store store = emailSession.getStore("pop3s");
+         Session emailSession = Session.getDefaultInstance(properties);
 
-      store.connect(host, user, password);
-      Folder emailFolder = store.getFolder("INBOX");
-      emailFolder.open(Folder.READ_ONLY);
-      Message[] messages = emailFolder.getMessages();
-      System.out.println("messages.length---" + messages.length);
+         Store store = emailSession.getStore("pop3s");
 
-      for (int i = 0; i < 2; i++) {
-         Message message = messages[i];
-         System.out.println("---------------------------------");
-         System.out.println("Email Number " + (i + 1));
-         System.out.println("Subject: " + message.getSubject());
-         System.out.println("From: " + message.getFrom()[0]);
-         System.out.println("Text: " + message.getContent().toString());
+         store.connect(host, user, password);
+         Folder emailFolder = store.getFolder("INBOX");
+         emailFolder.open(Folder.READ_ONLY);
+         Message[] messages = emailFolder.getMessages();
+         System.out.println("messages.length---" + messages.length);
 
-      }
-      emailFolder.close(false);
-      store.close();
+         for (int i = 0; i < 2; i++) {
+            Message message = messages[i];
+            System.out.println("---------------------------------");
+            System.out.println("Email Number " + (i + 1));
+            System.out.println("Subject: " + message.getSubject());
+            System.out.println("From: " + message.getFrom()[0]);
+            System.out.println("Text: " + message.getContent().toString());
+
+         }
+         emailFolder.close(false);
+         store.close();
 
       } catch (NoSuchProviderException e) {
          e.printStackTrace();
@@ -64,7 +55,7 @@ public class POP {
       String host = "pop.gmail.com";
       String mailStoreType = "pop3";
       String username = "jawajava748@gmail.com";
-      String password = "zpjhvaziqkycrqwd";
+      String password = "ctjijzbhtytkgwum";
 
       check(host, mailStoreType, username, password);
 

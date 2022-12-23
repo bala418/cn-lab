@@ -8,25 +8,11 @@ public class PingProgram {
     Process process = build.start();
 
     BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-    BufferedReader Error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
     String s = null;
 
     while ((s = input.readLine()) != null) {
       System.out.println(s);
     }
-    System.out.println("Error (if any): ");
-    while ((s = Error.readLine()) != null) {
-      System.out.println(s);
-    }
-  }
-
-  public static void sendPingRequest(String ipAddress) throws Exception {
-    InetAddress ip = InetAddress.getByName(ipAddress);
-    // System.out.println("Sending Ping Request to " + ipAddress);
-    if (ip.isReachable(5000))
-      System.out.println("Host is reachable");
-    else
-      System.out.println("Sorry ! The host is not reachable");
   }
 
   public static void main(String[] args) throws Exception {
@@ -36,8 +22,6 @@ public class PingProgram {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter the IP Address/Domain Name:");
     String ipAddress = sc.nextLine();
-
-    sendPingRequest(ipAddress);
 
     commandList.add("ping");
     commandList.add(ipAddress);

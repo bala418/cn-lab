@@ -2,22 +2,16 @@ import java.io.*;
 import java.net.*;
 
 class UDPChatClient {
-    public static DatagramSocket clientsocket;
-    public static DatagramPacket dp;
-    public static BufferedReader dis;
-    public static InetAddress ia;
     public static byte buf[] = new byte[1024];
     public static int cport = 789, sport = 790;
 
     public static void main(String[] a) throws IOException {
-        clientsocket = new DatagramSocket(cport);
-        dp = new DatagramPacket(buf, buf.length);
-        dis = new BufferedReader(new InputStreamReader(System.in));
-        ia = InetAddress.getLocalHost();
+        DatagramSocket clientsocket = new DatagramSocket(cport);
+        DatagramPacket dp = new DatagramPacket(buf, buf.length);
+        BufferedReader dis = new BufferedReader(new InputStreamReader(System.in));
+        InetAddress ia = InetAddress.getLocalHost();
         System.out.println("Client is Running... Type 'STOP' to Quit");
 
-
-        
         while (true) {
             String str = new String(dis.readLine());
             buf = str.getBytes();

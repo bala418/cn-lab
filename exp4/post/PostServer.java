@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.*;
-import java.util.*;
 
 class PostServer {
     private static final String USER_AGENT = "Google Chrome";
@@ -11,7 +10,6 @@ class PostServer {
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setDoOutput(true);
-        OutputStream os = con.getOutputStream();
         int responseCode = con.getResponseCode();
         System.out.println("POST Response Code :: " + responseCode);
         if (responseCode == HttpURLConnection.HTTP_OK) {

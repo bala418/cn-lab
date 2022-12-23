@@ -12,10 +12,10 @@ import java.io.*;
 import java.util.*;
 import javax.mail.*;
 
-public class POP2{
+public class POP2 {
 
    public static void fetch(String pop3Host, String storeType, String user,
-      String password) {
+         String password) {
       try {
          // create properties field
          Properties properties = new Properties();
@@ -33,7 +33,7 @@ public class POP2{
          emailFolder.open(Folder.READ_ONLY);
 
          BufferedReader reader = new BufferedReader(new InputStreamReader(
-	      System.in));
+               System.in));
          Message[] messages = emailFolder.getMessages();
          System.out.println("messages.length---" + messages.length);
 
@@ -60,15 +60,14 @@ public class POP2{
       } catch (Exception e) {
          e.printStackTrace();
       }
-}
+   }
 
    public static void main(String[] args) {
 
       String host = "pop.gmail.com";
       String mailStoreType = "pop3";
-      String username = 
-         "jawajava748@gmail.com";
-      String password = "zpjhvaziqkycrqwd";
+      String username = "jawajava748@gmail.com";
+      String password = "ctjijzbhtytkgwum";
 
       fetch(host, mailStoreType, username, password);
 
@@ -85,21 +84,18 @@ public class POP2{
          System.out.println("This is plain text");
          System.out.println("---------------------------");
          System.out.println((String) p.getContent());
-      } 
-      else if (p.isMimeType("multipart/*")) {
+      } else if (p.isMimeType("multipart/*")) {
          System.out.println("This is a Multipart");
          System.out.println("---------------------------");
          Multipart mp = (Multipart) p.getContent();
          int count = mp.getCount();
          for (int i = 0; i < count; i++)
             writePart(mp.getBodyPart(i));
-      } 
-      else if (p.isMimeType("message/rfc822")) {
+      } else if (p.isMimeType("message/rfc822")) {
          System.out.println("This is a Nested Message");
          System.out.println("---------------------------");
          writePart((Part) p.getContent());
-      } 
-      else if (p.isMimeType("image/jpeg")) {
+      } else if (p.isMimeType("image/jpeg")) {
          System.out.println("--------> image/jpeg");
          Object o = p.getContent();
 
@@ -111,33 +107,29 @@ public class POP2{
          while ((i = (int) ((InputStream) x).available()) > 0) {
             int result = (int) (((InputStream) x).read(bArray));
             if (result == -1)
-            break;
+               break;
          }
          FileOutputStream f2 = new FileOutputStream("/tmp/image.jpg");
          f2.write(bArray);
-      } 
-      else if (p.getContentType().contains("image/")) {
+      } else if (p.getContentType().contains("image/")) {
          System.out.println("content type" + p.getContentType());
          File f = new File("image" + new Date().getTime() + ".jpg");
          DataOutputStream output = new DataOutputStream(
-            new BufferedOutputStream(new FileOutputStream(f)));
-            com.sun.mail.util.BASE64DecoderStream test = 
-                 (com.sun.mail.util.BASE64DecoderStream) p
-                  .getContent();
+               new BufferedOutputStream(new FileOutputStream(f)));
+         com.sun.mail.util.BASE64DecoderStream test = (com.sun.mail.util.BASE64DecoderStream) p
+               .getContent();
          byte[] buffer = new byte[1024];
          int bytesRead;
          while ((bytesRead = test.read(buffer)) != -1) {
             output.write(buffer, 0, bytesRead);
          }
-      } 
-      else {
+      } else {
          Object o = p.getContent();
          if (o instanceof String) {
             System.out.println("This is a string");
             System.out.println("---------------------------");
             System.out.println((String) o);
-         } 
-         else if (o instanceof InputStream) {
+         } else if (o instanceof InputStream) {
             System.out.println("This is just an input stream");
             System.out.println("---------------------------");
             InputStream is = (InputStream) o;
@@ -145,15 +137,14 @@ public class POP2{
             int c;
             while ((c = is.read()) != -1)
                System.out.write(c);
-         } 
-         else {
+         } else {
             System.out.println("This is an unknown type");
             System.out.println("---------------------------");
             System.out.println(o.toString());
          }
-   }
+      }
 
-}
+   }
 
    public static void writeEnvelope(Message m) throws Exception {
       System.out.println("This is the message envelope");
@@ -161,11 +152,11 @@ public class POP2{
       Address[] a;
       if ((a = m.getFrom()) != null) {
          for (int j = 0; j < a.length; j++)
-         System.out.println("FROM: " + a[j].toString());
+            System.out.println("FROM: " + a[j].toString());
       }
       if ((a = m.getRecipients(Message.RecipientType.TO)) != null) {
          for (int j = 0; j < a.length; j++)
-         System.out.println("TO: " + a[j].toString());
+            System.out.println("TO: " + a[j].toString());
       }
       if (m.getSubject() != null)
          System.out.println("SUBJECT: " + m.getSubject());

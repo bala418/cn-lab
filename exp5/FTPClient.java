@@ -8,7 +8,7 @@ public class FTPClient {
 
         FileOutputStream fo = new FileOutputStream("js2.jfif");
 
-        byte b[] = new byte[20000];
+        byte b[] = new byte[10000];
         is.read(b, 0, b.length);
         fo.write(b, 0, b.length);
         System.out.println("File saved successfully!");

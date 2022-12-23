@@ -2,16 +2,15 @@ import java.io.*;
 import java.net.*;
 
 class GetServer {
-    private static final String USER_AGENT = "Google Chrome";
 
     static String sendGET(String GET_URL) throws IOException {
         URL obj = new URL(GET_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("User-Agent", "Google Chrome");
         int responseCode = con.getResponseCode();
         System.out.println("GET Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK) {
+        if (responseCode == 200) {
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
@@ -19,7 +18,7 @@ class GetServer {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
+            // System.out.println(response.toString());
             return (response.toString());
         } else {
             System.out.println("GET request not worked");
@@ -31,10 +30,10 @@ class GetServer {
         ServerSocket ss = new ServerSocket(6789);
         Socket connectionSocket = ss.accept();
         BufferedReader ifs = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-        DataOutputStream ots = new DataOutputStream(connectionSocket.getOutputStream());
+        PrintStream ps = new PrintStream(connectionSocket.getOutputStream());
         String sentence = ifs.readLine();
         String ms = sendGET(sentence);
-        ots.writeBytes(ms + '\n');
+        ps.println(ms);
 
         connectionSocket.close();
 
